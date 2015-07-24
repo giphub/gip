@@ -2,7 +2,7 @@
 import torndb
 import datetime
 from constants.errorcode import Errorcode
-from util.lt_exception import LTException 
+from util.gip_exception import GipException
 
 
 class DB(object):
@@ -14,14 +14,11 @@ class DB(object):
     
     
     def sample(self):
-        '''
-        示例代码
-        '''
+        
         try:
             sql = ''' select count(1) from tag'''
             result = self.mysql_write.query(sql)
         except:
-            # 抛出异常
             pass
         finally:
             
@@ -29,17 +26,15 @@ class DB(object):
 
     
     def get_article_by_id(self,id):
-        '''
-        示例代码
-        '''
+        
         try:
             sql = ''' select * from article where id =%s limit 1'''%(id)
             result = self.mysql_write.query(sql)
         except:
-            # 抛出异常
             pass
         finally:
             
             return result[0]
 
     
+
