@@ -1,0 +1,9 @@
+Thu, 23 Jul 2015 21:26:54 start_server.py[line:45] INFO ......启动总耗时：8.34202766418毫秒
+Thu, 23 Jul 2015 21:26:57 main_handler.py[line:33] INFO 记录日志
+Thu, 23 Jul 2015 21:26:57 web.py[line:1811] INFO 200 POST / (127.0.0.1) 6.22ms
+Thu, 23 Jul 2015 21:26:57 main_handler.py[line:33] INFO 记录日志
+Thu, 23 Jul 2015 21:26:57 web.py[line:1811] INFO 200 POST / (127.0.0.1) 5.76ms
+Thu, 23 Jul 2015 21:27:19 main_handler.py[line:33] INFO 记录日志
+Thu, 23 Jul 2015 21:27:19 web.py[line:1811] INFO 200 POST / (127.0.0.1) 6.92ms
+Thu, 23 Jul 2015 21:27:19 main_handler.py[line:33] INFO 记录日志
+Thu, 23 Jul 2015 21:27:19 web.py[line:1811] INFO 200 POST / (127.0.0.1) 1.41ms
