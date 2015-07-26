@@ -49,8 +49,9 @@ class MainHandler(BaseHandler):
             print e.errorcode   
             self.response_body = {"error":e.errorcode}      
 
-        except:
+        except e:
             # 捕获所有抛出的错误，并作相应处理。
+            print e
             self.response_body = {"error":123}
             pass
         finally:

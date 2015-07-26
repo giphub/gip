@@ -25,12 +25,16 @@ class GetById(Processor):
     def process(self):
 
         article_id = self.handler.request_body['params']['id']
-                 
+                
+        article = self.db.get_article_by_id(article_id)
+        
+        article = self.filter_db_res(article)     
+   
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
         response['data']['message'] =  "article get by id 成功显示"
-        response['data']['sample'] =self.db.get_article_by_id(article_id)['title']
+        response['data']['article'] = article
                                       
         return response
 

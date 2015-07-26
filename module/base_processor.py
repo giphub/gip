@@ -3,6 +3,8 @@
 Created on 2013-11-4
 
 '''
+import datetime
+
 from service.db import DB
 
 from constants.constants import Constants
@@ -22,6 +24,18 @@ class Processor():
         self.handler = handler
         self.db = DB(handler.application)
         pass
+
+    def filter_db_res(self,db_res):
+        '''
+        判断是否是list，分解为dict，
+        将dict中不能变为json的部分过滤或做处理
+        '''        
+        for key in db_res:
+            #print type(db_res[key])
+            if type(db_res[key]) == datetime.datetime:
+                db_res[key] = db_res[key].strftime("%Y-%m-%d %H:%M:%S")  
+           
+        return db_res
 
 def module(protocol):
     '''

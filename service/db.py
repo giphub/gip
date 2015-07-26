@@ -29,7 +29,7 @@ class DB(object):
         
         try:
             sql = ''' select * from article where id =%s limit 1'''%(id)
-            result = self.mysql_write.query(sql)
+            result = self.mysql_read.query(sql)
         except:
             pass
         finally:
