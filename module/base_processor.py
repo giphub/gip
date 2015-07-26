@@ -29,11 +29,15 @@ class Processor():
         '''
         判断是否是list，分解为dict，
         将dict中不能变为json的部分过滤或做处理
-        '''        
-        for key in db_res:
-            #print type(db_res[key])
-            if type(db_res[key]) == datetime.datetime:
-                db_res[key] = db_res[key].strftime("%Y-%m-%d %H:%M:%S")  
+        '''     
+        if isinstance(db_res, list):
+            for i in xrange(0,len(db_res)):
+                db_res[i] = self.filter_db_res(db_res[1])
+        elif isinstance(db_res, dict):
+               
+            for key in db_res:
+                if type(db_res[key]) == datetime.datetime:
+                    db_res[key] = db_res[key].strftime("%Y-%m-%d %H:%M:%S")  
            
         return db_res
 
