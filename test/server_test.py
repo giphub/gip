@@ -65,7 +65,7 @@ class ServerTest(unittest.TestCase):
             print response.reason
             
 
-            print response.read()#.decode("unicode_escape") 
+            print response.read().decode("unicode_escape") 
             print time.time()
         except Exception, e:
             print e
