@@ -16,7 +16,7 @@ from util.gip_exception import GipException
 # 引入具体业务module
 from module.sample.module_sample import ModuleSample
 from module.article.get_by_id import GetById
-
+from module.article.search_by_keyword_in_title import SearchByKeywordInTitle
 
 class MainHandler(BaseHandler):
     '''

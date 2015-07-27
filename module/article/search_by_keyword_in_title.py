@@ -29,9 +29,9 @@ class SearchByKeywordInTitle(Processor):
         limit_size = self.handler.request_body['params']['limit']
                 
         articles = self.db.get_article_summary_by_keyword_in_title(keyword,start_id,limit_size)
-        
+
         articles = self.filter_db_res(articles)     
-   
+ 
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE

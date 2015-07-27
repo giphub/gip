@@ -32,7 +32,7 @@ class Processor():
         '''     
         if isinstance(db_res, list):
             for i in xrange(0,len(db_res)):
-                db_res[i] = self.filter_db_res(db_res[1])
+                db_res[i] = self.filter_db_res(db_res[i])
         elif isinstance(db_res, dict):
                
             for key in db_res:
