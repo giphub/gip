@@ -36,5 +36,14 @@ class DB(object):
             
             return result[0]
 
-    
+    def get_article_summary_by_keyword_in_title(self,keyword,start_id,limit_size):
 
+        try:
+            sql = ''' select id,title,description,category,create_time,keywords from article where title like'%%%%%s%%%%' limit %s,%s'''%(keyword,start_id,limit_size)
+            result = self.mysql_read.query(sql)
+        except:
+            pass
+        finally:
+            
+            return result
+   

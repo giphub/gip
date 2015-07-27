@@ -50,10 +50,18 @@ class ServerTest(unittest.TestCase):
         '''
         示例代码
         '''
-        body = {"protocol":Protocol.ARTICLE_GETBYID,"params":{"id":11}}
+        body = {"protocol":Protocol.ARTICLE_GET_BY_ID,"params":{"id":11}}
         headers = {} 
         self.__http_request(body, headers)
                 
+    def article_search_by_keyword_in_title(self):
+        '''
+        示例代码
+        '''
+        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE,"params":{"keyword":"发烧","start":1100,"limit":5}}
+        headers = {} 
+        self.__http_request(body, headers)
+    
     def __http_request(self,body,headers):
         
         try:

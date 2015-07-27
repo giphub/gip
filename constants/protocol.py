@@ -18,4 +18,5 @@ class Protocol(object):
     跟数据库中的article表相关的内容
     '''
 
-    ARTICLE_GETBYID = 1001
+    ARTICLE_GET_BY_ID = 1001
+    ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE = 1002

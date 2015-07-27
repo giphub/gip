@@ -12,8 +12,8 @@ from module.base_processor import module
 from util.gip_exception import GipException 
 
 
-@module(protocol=Protocol.ARTICLE_GET_BY_ID)
-class GetById(Processor):
+@module(protocol=Protocol.ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE)
+class SearchByKeywordInTitle(Processor):
     '''
     示例程序
   
@@ -24,17 +24,19 @@ class GetById(Processor):
         
     def process(self):
 
-        article_id = self.handler.request_body['params']['id']
+        keyword = self.handler.request_body['params']['keyword']
+        start_id = self.handler.request_body['params']['start']
+        limit_size = self.handler.request_body['params']['limit']
                 
-        article = self.db.get_article_by_id(article_id)
+        articles = self.db.get_article_summary_by_keyword_in_title(keyword,start_id,limit_size)
         
-        article = self.filter_db_res(article)     
+        articles = self.filter_db_res(articles)     
    
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
-        response['data']['message'] =  "article get by id 成功显示"
-        response['data']['article'] = article
+        response['data']['message'] =  "article get by keyword 成功显示"
+        response['data']['article'] = articles
                                       
         return response
 
