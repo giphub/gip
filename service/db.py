@@ -8,8 +8,15 @@ from util.gip_exception import GipException
 class DB(object):
     
     def __init__(self, application):
-        self.mysql_read = application.mysql_conn_read
-        self.mysql_write = application.mysql_conn_write
+
+        self.mysql_account_read = application.db_conn['mysql']['account']['read']
+        self.mysql_account_write = application.db_conn['mysql']['account']['write']
+
+        self.mysql_article_read = application.db_conn['mysql']['article']['read']
+        self.mysql_article_write = application.db_conn['mysql']['article']['write']
+        
+
+
         #self.mongo_conn = application.mongo_conn
     
     
@@ -17,7 +24,7 @@ class DB(object):
         
         try:
             sql = ''' select count(1) from tag'''
-            result = self.mysql_write.query(sql)
+            result = self.mysql_account_write.query(sql)
         except:
             pass
         finally:
@@ -29,7 +36,7 @@ class DB(object):
         
         try:
             sql = ''' select * from article where id =%s limit 1'''%(id)
-            result = self.mysql_read.query(sql)
+            result = self.mysql_article_read.query(sql)
         except:
             pass
         finally:
@@ -40,7 +47,7 @@ class DB(object):
 
         try:
             sql = ''' select id,title,description,category,create_time,keywords from article where title like'%%%%%s%%%%' limit %s,%s'''%(keyword,start_id,limit_size)
-            result = self.mysql_read.query(sql)
+            result = self.mysql_article_read.query(sql)
         except:
             pass
         finally:

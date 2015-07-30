@@ -36,38 +36,43 @@ class App(tornado.web.Application):
                     debug=False,)
         super(App, self).__init__(handlers, **settings)
 
-        
-
         # 创建数据库链接
-        self.mysql_conn_read,self.mysql_conn_write = self.build_db_connection(config)
+        self.db_conn = {'mysql':{},'mongodb':{},'redis':{}}
+        self.build_db_connection(config,'mysql','account')
+        self.build_db_connection(config,'mysql','article')
         
         end = time.time()
         logging.info("......启动总耗时："+str((end-start)*1000)+"毫秒")
         print("......启动总耗时："+str((end-start)*1000)+"毫秒")
-        
-    def build_db_connection(self,config):
-        
-        mysql_host=config.get("mysql_read", "host")
-        mysql_database=config.get("mysql_read", "database")
-        mysql_user=config.get("mysql_read", "user")
-        mysql_password=config.get("mysql_read", "password")
-
-        mysql_conn_read = torndb.Connection(host=mysql_host, database=mysql_database,
-             user=mysql_user, password=mysql_password,time_zone="+8:00")
-        
-        # 写
-        mysql_host=config.get("mysql_write", "host")
-        mysql_database=config.get("mysql_write", "database")
-        mysql_user=config.get("mysql_write", "user")
-        mysql_password=config.get("mysql_write", "password")
-
-        mysql_conn_write = torndb.Connection(host=mysql_host, database=mysql_database,
-             user=mysql_user, password=mysql_password,time_zone="+8:00")
-        
-        return mysql_conn_read,mysql_conn_write    
-        
+    
+    def build_db_connection(self,config,type,name):
+        '''
+        创建数据库链接
+        type为数据库种类 如mysql，mongo，redis之类，name为数据库标识名称
+        配置文件中的mysql数据库配置通常是由type_name_read/write组成
+        形如 mysql_account_read
+        '''
+        if type == 'mysql':
+            self.db_conn[type][name] = {}
+            self.db_conn[type][name]['read'] = self.build_mysql_db_connection(config,name,'read')
+            self.db_conn[type][name]['write'] = self.build_mysql_db_connection(config,name,'write')
+        elif type == 'mongodb':
+            pass
+        elif type == 'redis':
+            pass
 
        
+    def build_mysql_db_connection(self,config,name,opr):
+        '''
+        添加数据库文件
+        '''
+        section = '_'.join(['mysql',name,opr])
+        host = config.get(section,'host')
+        db = config.get(section,'database')
+        user = config.get(section,'user')
+        pwd = config.get(section,'password')
+        return torndb.Connection(host=host, database=db, user=user, password=pwd,time_zone="+8:00")
+
 def main():
     
     '''

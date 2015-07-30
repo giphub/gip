@@ -58,7 +58,7 @@ class ServerTest(unittest.TestCase):
         '''
         示例代码
         '''
-        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE,"params":{"keyword":"发烧","start":1100,"limit":5}}
+        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE,"params":{"keyword":"孩","start":1100,"limit":5}}
         headers = {} 
         self.__http_request(body, headers)
     
