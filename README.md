@@ -1,2 +1,4 @@
 # gip
-The server of giphub
+The server of giphub base on Tornado
+
+
