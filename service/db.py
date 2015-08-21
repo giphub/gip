@@ -1,6 +1,8 @@
 #coding=utf-8
 import torndb
 import datetime
+import httplib
+
 from constants.errorcode import Errorcode
 from util.gip_exception import GipException
 
@@ -16,7 +18,8 @@ class DB(object):
         self.mysql_article_write = application.db_conn['mysql']['article']['write']
         
 
-
+        self.solr_article_url = application.db_conn['solr']['article']['url'] 
+        self.solr_article_path = application.db_conn['solr']['article']['path'] 
         #self.mongo_conn = application.mongo_conn
     
     
@@ -30,6 +33,30 @@ class DB(object):
         finally:
             
             return result[0]
+
+
+    def sample_solr(self):
+
+        res = {}
+
+        query = '*%3A*'
+        wt = 'python'
+        indent = 'true'
+
+        path = self.solr_article_path + '''select?q=%s&wt=%s&indent=%s'''%(query,wt,indent)
+        try:
+            httpClient = httplib.HTTPConnection(self.solr_article_url)
+            httpClient.request("GET", path, '' , {})
+
+            response = httpClient.getresponse()
+
+            res = response.read().decode("unicode_escape")
+        except Exception, e:
+            print e
+        finally:
+            if httpClient:
+                httpClient.close()
+            return res
 
     
     def get_article_by_id(self,id):

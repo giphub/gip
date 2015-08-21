@@ -30,7 +30,8 @@ class ModuleSample(Processor):
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
         response['data']['message'] =  "module sample 成功显示"
-        response['data']['sample'] =self.db.sample()
+        response['data']['sample'] = self.db.sample()
+        response['data']['sample_solr'] = self.db.sample_solr()
                                       
         return response
 

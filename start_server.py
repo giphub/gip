@@ -37,10 +37,15 @@ class App(tornado.web.Application):
         super(App, self).__init__(handlers, **settings)
 
         # 创建数据库链接
-        self.db_conn = {'mysql':{},'mongodb':{},'redis':{}}
+        self.db_conn = {'mysql':{},'mongodb':{},'redis':{},'solr':{}}
         self.build_db_connection(config,'mysql','account')
         self.build_db_connection(config,'mysql','article')
-        
+        self.build_db_connection(config,'solr','article')
+        self.build_db_connection(config,'solr','article_tag')
+
+
+        #print self.db_conn
+
         end = time.time()
         logging.info("......启动总耗时："+str((end-start)*1000)+"毫秒")
         print("......启动总耗时："+str((end-start)*1000)+"毫秒")
@@ -60,11 +65,27 @@ class App(tornado.web.Application):
             pass
         elif type == 'redis':
             pass
+        elif type == 'solr':
+            self.db_conn[type][name] = {}
+            self.db_conn[type][name]['url'] , self.db_conn[type][name]['path'] = self.build_solr_db_connection(config,name)
+         
+   
+    def build_solr_db_connection(self,config,name):
+        '''
+        添加solr的链接
+        '''
+        section = '_'.join(['solr',name])
+        host = config.get(section,'host')
+        port = config.get(section,'port')
+        collection = config.get(section,'collection')
+        url = host + ':' + port 
+        path = '/solr/' + collection + '/' 
+        return url,path
 
-       
+
     def build_mysql_db_connection(self,config,name,opr):
         '''
-        添加数据库文件
+        添加数据库链接
         '''
         section = '_'.join(['mysql',name,opr])
         host = config.get(section,'host')
