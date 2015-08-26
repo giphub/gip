@@ -4,6 +4,8 @@ import datetime
 import httplib
 import urllib
 
+from tornado.escape import json_decode
+
 from constants.errorcode import Errorcode
 from util.gip_exception import GipException
 
@@ -18,9 +20,9 @@ class DB(object):
         self.mysql_article_read = application.db_conn['mysql']['article']['read']
         self.mysql_article_write = application.db_conn['mysql']['article']['write']
         
+        self.solr = {}
+        self.solr['article'] = application.db_conn['solr']['article']
 
-        self.solr_article_url = application.db_conn['solr']['article']['url'] 
-        self.solr_article_path = application.db_conn['solr']['article']['path'] 
         #self.mongo_conn = application.mongo_conn
     
     
@@ -36,31 +38,17 @@ class DB(object):
             return result[0]
 
 
-    def sample_solr(self):
 
-        res = {}
+
+    def sample_solr(self):
         data ={
         	'q':'title:幼儿园',
-                'wt':'python',
+                'wt':'json',
                 'indent':'true'}
-                
+        return self.solr_query('article',data)                
 
-        path = self.solr_article_path + '''select?''' + urllib.urlencode(data)
-        try:
-            httpClient = httplib.HTTPConnection(self.solr_article_url)
-            httpClient.request("GET", path, '' , {})
 
-            response = httpClient.getresponse()
 
-            res = response.read().decode("unicode_escape")
-        except Exception, e:
-            print e
-        finally:
-            if httpClient:
-                httpClient.close()
-            return res
-
-    
     def get_article_by_id(self,id):
         
         try:
@@ -83,3 +71,20 @@ class DB(object):
             
             return result
    
+    def solr_query(self,index,data):
+
+        res = {}
+        path = self.solr[index]['path'] + '''select?''' + urllib.urlencode(data)
+        try:
+            httpClient = httplib.HTTPConnection(self.solr[index]['url'])
+            httpClient.request("GET", path, '' , {})
+
+            response = httpClient.getresponse()
+
+            res = response.read()
+        except Exception, e:
+            print e
+        finally:
+            if httpClient:
+                httpClient.close()
+            return json_decode(res)
