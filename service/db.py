@@ -44,6 +44,9 @@ class DB(object):
         data ={
         	'q':'title:幼儿园',
                 'wt':'json',
+                'start':10,
+                'rows':50,
+                'fl':'title',
                 'indent':'true'}
         return self.solr_query('article',data)                
 

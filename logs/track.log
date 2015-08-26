@@ -1,7 +1,13 @@
-Wed, 26 Aug 2015 19:56:15 start_server.py[line:50] INFO ......启动总耗时：15.3329372406毫秒
-Wed, 26 Aug 2015 19:56:19 main_handler.py[line:29] INFO 记录日志
-Wed, 26 Aug 2015 19:56:19 web.py[line:1908] INFO 200 POST / (127.0.0.1) 20.16ms
-Wed, 26 Aug 2015 19:56:19 main_handler.py[line:29] INFO 记录日志
-Wed, 26 Aug 2015 19:56:19 web.py[line:1908] INFO 200 POST / (127.0.0.1) 3.39ms
-Wed, 26 Aug 2015 19:56:19 main_handler.py[line:29] INFO 记录日志
-Wed, 26 Aug 2015 19:56:19 web.py[line:1908] INFO 200 POST / (127.0.0.1) 18.86ms
+Wed, 26 Aug 2015 20:10:37 start_server.py[line:50] INFO ......启动总耗时：15.6831741333毫秒
+Wed, 26 Aug 2015 20:10:41 main_handler.py[line:29] INFO 记录日志
+Wed, 26 Aug 2015 20:10:41 web.py[line:1908] INFO 200 POST / (127.0.0.1) 25.21ms
+Wed, 26 Aug 2015 20:10:41 main_handler.py[line:29] INFO 记录日志
+Wed, 26 Aug 2015 20:10:41 web.py[line:1908] INFO 200 POST / (127.0.0.1) 3.27ms
+Wed, 26 Aug 2015 20:10:41 main_handler.py[line:29] INFO 记录日志
+Wed, 26 Aug 2015 20:10:41 web.py[line:1908] INFO 200 POST / (127.0.0.1) 17.56ms
+Wed, 26 Aug 2015 20:10:49 main_handler.py[line:29] INFO 记录日志
+Wed, 26 Aug 2015 20:10:49 web.py[line:1908] INFO 200 POST / (127.0.0.1) 16.71ms
+Wed, 26 Aug 2015 20:10:49 main_handler.py[line:29] INFO 记录日志
+Wed, 26 Aug 2015 20:10:49 web.py[line:1908] INFO 200 POST / (127.0.0.1) 1.72ms
+Wed, 26 Aug 2015 20:10:49 main_handler.py[line:29] INFO 记录日志
+Wed, 26 Aug 2015 20:10:49 web.py[line:1908] INFO 200 POST / (127.0.0.1) 17.82ms
