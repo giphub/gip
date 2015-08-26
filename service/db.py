@@ -2,6 +2,7 @@
 import torndb
 import datetime
 import httplib
+import urllib
 
 from constants.errorcode import Errorcode
 from util.gip_exception import GipException
@@ -38,12 +39,13 @@ class DB(object):
     def sample_solr(self):
 
         res = {}
+        data ={
+        	'q':'title:幼儿园',
+                'wt':'python',
+                'indent':'true'}
+                
 
-        query = '*%3A*'
-        wt = 'python'
-        indent = 'true'
-
-        path = self.solr_article_path + '''select?q=%s&wt=%s&indent=%s'''%(query,wt,indent)
+        path = self.solr_article_path + '''select?''' + urllib.urlencode(data)
         try:
             httpClient = httplib.HTTPConnection(self.solr_article_url)
             httpClient.request("GET", path, '' , {})
