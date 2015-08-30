@@ -54,11 +54,11 @@ class ServerTest(unittest.TestCase):
         headers = {} 
         self.__http_request(body, headers)
                 
-    def article_search_by_keyword_in_title(self):
+    def article_search_by_keyword(self):
         '''
         示例代码
         '''
-        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE,"params":{"keyword":"孩","start":1100,"limit":5}}
+        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD,"params":{"keyword":"孩","start":1100,"limit":5}}
         headers = {} 
         self.__http_request(body, headers)
     

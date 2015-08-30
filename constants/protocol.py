@@ -28,4 +28,7 @@ class Protocol(object):
     '''
 
     ARTICLE_GET_BY_ID = 1001
-    ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE = 1002
+    ARTICLE_SEARCH_BY_KEYWORD = 1002
+
+
+

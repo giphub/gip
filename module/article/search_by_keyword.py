@@ -12,8 +12,8 @@ from module.base_processor import module
 from util.gip_exception import GipException 
 
 
-@module(protocol=Protocol.ARTICLE_SEARCH_BY_KEYWORD_IN_TITLE)
-class SearchByKeywordInTitle(Processor):
+@module(protocol=Protocol.ARTICLE_SEARCH_BY_KEYWORD)
+class SearchByKeyword(Processor):
     '''
     示例程序
   
