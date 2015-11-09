@@ -14,9 +14,9 @@ class DB(object):
     
     def __init__(self, application):
 
-        self.mysql_account_read = application.db_conn['mysql']['account']['read']
-        self.mysql_account_write = application.db_conn['mysql']['account']['write']
-
+        self.mysql_article_read = application.db_conn['mysql']['account']['read']
+        self.mysql_article_write = application.db_conn['mysql']['account']['write']
+        
         self.mysql_article_read = application.db_conn['mysql']['article']['read']
         self.mysql_article_write = application.db_conn['mysql']['article']['write']
         
