@@ -28,15 +28,14 @@ class SearchByKeyword(Processor):
         start_id = self.handler.request_body['params']['start']
         limit_size = self.handler.request_body['params']['limit']
                 
-        articles = self.db.get_article_summary_by_keyword_in_title(keyword,start_id,limit_size)
 
-        articles = self.filter_db_res(articles)     
+        #articles = self.filter_db_res(articles)     
  
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
         response['data']['message'] =  "article get by keyword 成功显示"
-        response['data']['article'] = articles
+        #response['data']['article'] = articles
                                       
         return response
 

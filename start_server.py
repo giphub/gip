@@ -38,8 +38,7 @@ class App(tornado.web.Application):
 
         # 创建数据库链接
         self.db_conn = {'mysql':{},'mongodb':{},'redis':{},'solr':{}}
-        self.build_db_connection(config,'mysql','account')
-        self.build_db_connection(config,'mysql','article')
+        self.build_db_connection(config,'mysql','test')
         self.build_db_connection(config,'solr','article')
         self.build_db_connection(config,'solr','article_tag')
 

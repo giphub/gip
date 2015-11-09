@@ -14,11 +14,9 @@ class DB(object):
     
     def __init__(self, application):
 
-        self.mysql_account_read = application.db_conn['mysql']['account']['read']
-        self.mysql_account_write = application.db_conn['mysql']['account']['write']
+        self.mysql_test_read = application.db_conn['mysql']['test']['read']
+        self.mysql_test_write = application.db_conn['mysql']['test']['write']
         
-        self.mysql_article_read = application.db_conn['mysql']['article']['read']
-        self.mysql_article_write = application.db_conn['mysql']['article']['write']
         
         self.solr = {}
         self.solr['article'] = application.db_conn['solr']['article']
@@ -29,8 +27,8 @@ class DB(object):
     def sample(self):
         
         try:
-            sql = ''' select count(1) from tag'''
-            result = self.mysql_account_write.query(sql)
+            sql = ''' select count(1) from sample'''
+            result = self.mysql_test_write.query(sql)
         except:
             pass
         finally:
@@ -50,29 +48,6 @@ class DB(object):
                 'indent':'true'}
         return self.solr_query('article',data)                
 
-
-
-    def get_article_by_id(self,id):
-        
-        try:
-            sql = ''' select * from article where id =%s limit 1'''%(id)
-            result = self.mysql_article_read.query(sql)
-        except:
-            pass
-        finally:
-            
-            return result[0]
-
-    def get_article_summary_by_keyword_in_title(self,keyword,start_id,limit_size):
-
-        try:
-            sql = ''' select id,title,description,category,create_time,keywords from article where title like'%%%%%s%%%%' limit %s,%s'''%(keyword,start_id,limit_size)
-            result = self.mysql_article_read.query(sql)
-        except:
-            pass
-        finally:
-            
-            return result
    
     def solr_query(self,index,data):
 
