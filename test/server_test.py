@@ -46,6 +46,21 @@ class ServerTest(unittest.TestCase):
         headers = {} 
         self.__http_request(body, headers)
 
+
+    def account_register(self):
+        '''
+        用户注册
+        '''
+        body = {"protocol":Protocol.ACCOUNT_REG,
+                "params":{"account":"13711112222",
+                          "type":"mdn",
+                          "password":"test"
+                         }
+               } 
+        headers = {} 
+        self.__http_request(body, headers)
+
+
     def article_get_by_id_test(self):
         '''
         示例代码
@@ -61,7 +76,10 @@ class ServerTest(unittest.TestCase):
         body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD,"params":{"keyword":"孩","start":1100,"limit":5}}
         headers = {} 
         self.__http_request(body, headers)
+   
     
+
+ 
     def __http_request(self,body,headers):
         
         try:

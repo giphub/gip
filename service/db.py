@@ -4,7 +4,7 @@ import datetime
 import httplib
 import urllib
 
-from tornado.escape import json_decode
+from tornado.escape import json_decode,json_encode
 
 from constants.errorcode import Errorcode
 from util.gip_exception import GipException
@@ -17,6 +17,8 @@ class DB(object):
         self.mysql_test_read = application.db_conn['mysql']['test']['read']
         self.mysql_test_write = application.db_conn['mysql']['test']['write']
         
+        self.mysql_account_read = application.db_conn['mysql']['account']['read']
+        self.mysql_account_write = application.db_conn['mysql']['account']['write']
         
         self.solr = {}
         self.solr['article'] = application.db_conn['solr']['article']
@@ -47,6 +49,24 @@ class DB(object):
                 'fl':'title',
                 'indent':'true'}
         return self.solr_query('article',data)                
+
+
+    def register(self,account,type,password):
+        if type == 'email':
+            sql = '''insert into user (email,mdn,password) value('%s','%s','%s')'''% (account,'',password)
+            info = json_encode({'email':account})
+        elif type == 'mdn':
+            sql = '''insert into user (email,mdn,password) value('%s','%s','%s')'''% ('',account,password)
+            info = json_encode({'mdn':account})
+        else:
+            sql = '''insert into user (email,mdn,password) value('%s','%s','%s')'''% (account,'',password)
+            info = json_encode({'email':account})
+        uid = self.mysql_account_write.execute(sql)
+        #print sql	
+        sql = '''insert into user_info(uid,info) value(%s,'%s')'''%(uid,info)
+        info_id = self.mysql_account_write.execute(sql)
+        #print sql
+        return uid
 
    
     def solr_query(self,index,data):
