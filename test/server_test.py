@@ -47,13 +47,52 @@ class ServerTest(unittest.TestCase):
         self.__http_request(body, headers)
 
 
-    def account_register(self):
+    def account_register_mdn(self):
         '''
-        用户注册
+        用户用手机注册
         '''
         body = {"protocol":Protocol.ACCOUNT_REG,
                 "params":{"account":"13711112222",
                           "type":"mdn",
+                          "password":"test"
+                         }
+               } 
+        headers = {} 
+        self.__http_request(body, headers)
+
+    def account_register_email(self):
+        '''
+        用户用手机注册
+        '''
+        body = {"protocol":Protocol.ACCOUNT_REG,
+                "params":{"account":"abc@abc.com",
+                          "type":"email",
+                          "password":"test"
+                         }
+               } 
+        headers = {} 
+        self.__http_request(body, headers)
+
+    def account_login_mdn(self):
+        '''
+        用户用手机注册
+        '''
+        body = {"protocol":Protocol.ACCOUNT_LOGIN,
+                "params":{"account":"13711112222",
+                          "type":"mdn",
+                          "password":"test"
+                         }
+               } 
+        headers = {} 
+        self.__http_request(body, headers)
+
+    def account_login_email(self):
+        '''
+        用户用手机注册
+        '''
+        body = {"protocol":Protocol.ACCOUNT_LOGIN,
+                "params":{"account":"abc@abc.com",
+                          "type":"email",
                           "password":"test"
                          }
                } 

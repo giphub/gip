@@ -11,15 +11,16 @@ from module.base_processor import Processor
 from module.base_processor import module
 from util.gip_exception import GipException 
 
+from tornado.escape import json_decode,json_encode
 
-@module(protocol=Protocol.ACCOUNT_REG)
+@module(protocol=Protocol.ACCOUNT_LOGIN)
 class ModuleSample(Processor):
     '''
-    账号注册：
-	用户填写用户名（邮箱/手机号）密码进行注册。
-	注册过程：1.用户名及md5加密之后的密码存入user表。
-		  2.将用户的用户名及其他除密码之外的信息，以json格式写入user_info表，方便以后迁移到mongo
-  
+    用户登录：
+	用户填写用户名（邮箱/手机号）密码进行登陆。
+	登陆过程：1.验证密码是否正确
+		  2.如果正确则返回用户的基本信息及token（TODO）
+        
     '''
     def __init__(self, handler):
         Processor.__init__(self, handler)
@@ -32,16 +33,17 @@ class ModuleSample(Processor):
         type = self.handler.request_body['params'].get('type',None)
         password = self.handler.request_body['params'].get('password',None)	
         try:
-            uid = self.db.register(account,type,password)
+            uid = self.db.check_password(account,type,password)
         except:
-            raise GipException(Errorcode.ACCOUNT_USERNAME_EXIST)
-
+            raise GipException(Errorcode.ACCOUNT_LOGIN_FAIL)
+        user_info = self.db.get_user_info(uid) 
+        
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
-        response['data']['message'] =  "用户注册成功"
+        response['data']['message'] =  "用户登陆成功"
         response['data']['uid'] = uid
-                                      
+        response['data']['info'] = json_decode(user_info)                              
         return response
 
  

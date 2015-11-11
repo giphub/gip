@@ -16,10 +16,11 @@ def load_modules(path):
         if os.path.isdir(path + '/' + py_file):
             load_modules(path + '/' + py_file)
             
-        if '.py' in py_file:
+        if '.py' == py_file[-3:]:
             module_set.add( (path + "/" + py_file).strip('.py') )
 
 load_modules(module_path)
 
 for module_name in module_set:
+    #print module_name
     importlib.import_module(module_name.replace('/' , '.'))

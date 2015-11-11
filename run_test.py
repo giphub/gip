@@ -14,7 +14,12 @@ if __name__ == '__main__':
     
     suite.addTest(ServerTest("sample_test"))
 
-    suite.addTest(ServerTest('account_register'))
+    suite.addTest(ServerTest('account_register_mdn'))
+    suite.addTest(ServerTest('account_register_email'))
+
+    suite.addTest(ServerTest('account_login_mdn'))
+    suite.addTest(ServerTest('account_login_email'))
+    
 
     suite.addTest(ServerTest("article_get_by_id_test"))
     suite.addTest(ServerTest("article_search_by_keyword"))

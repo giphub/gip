@@ -17,5 +17,6 @@ class Errorcode(object):
     ERROR_NONE = 0
     MISSING_PARAM  = 1
     MODULE_DO_NOT_EXIST = 2
-
-
+    
+    ACCOUNT_USERNAME_EXIST = 101
+    ACCOUNT_LOGIN_FAIL = 102

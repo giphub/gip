@@ -19,10 +19,8 @@ class Protocol(object):
     跟用户相关
     '''
     ACCOUNT_REG = 1
-    ACCOUNT_UPDATE = 2
-    ACCOUNT_GET_INFO =3
+    ACCOUNT_LOGIN = 2
     
- 
     '''
     跟数据库中的article表相关的内容
     '''

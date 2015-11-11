@@ -52,15 +52,13 @@ class DB(object):
 
 
     def register(self,account,type,password):
+        
+        sql = '''insert into user (email,mdn,password) value('%s','%s','%s')'''
         if type == 'email':
-            sql = '''insert into user (email,mdn,password) value('%s','%s','%s')'''% (account,'',password)
-            info = json_encode({'email':account})
+            sql = sql% (account,'',password)
         elif type == 'mdn':
-            sql = '''insert into user (email,mdn,password) value('%s','%s','%s')'''% ('',account,password)
-            info = json_encode({'mdn':account})
-        else:
-            sql = '''insert into user (email,mdn,password) value('%s','%s','%s')'''% (account,'',password)
-            info = json_encode({'email':account})
+            sql = sql% ('',account,password)
+        info = json_encode({type:account})
         uid = self.mysql_account_write.execute(sql)
         #print sql	
         sql = '''insert into user_info(uid,info) value(%s,'%s')'''%(uid,info)
@@ -68,7 +66,19 @@ class DB(object):
         #print sql
         return uid
 
-   
+       
+
+    def check_password(self,account,type,password):
+        sql = '''select id from user where `%s`='%s' and password='%s' limit 1'''%(type,account,password)
+        uid = self.mysql_account_read.query(sql)[0]['id']  
+        return uid
+
+
+    def get_user_info(self,uid):
+        sql = '''select info from user_info where uid = %s limit 1'''% uid
+        info = self.mysql_account_read.query(sql)[0]['info']
+        return info
+ 
     def solr_query(self,index,data):
 
         res = {}
