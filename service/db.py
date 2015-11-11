@@ -48,7 +48,35 @@ class DB(object):
                 'rows':50,
                 'fl':'title',
                 'indent':'true'}
+        #print data
         return self.solr_query('article',data)                
+
+
+    def get_article(self,id):
+        
+        query_data = {
+                'q':'id:%s'%id,
+                'wt':'json',
+                'indent':'true'}
+
+        return self.solr_query('article',query_data)
+
+    def search_article_by_keyword(self,keyword,start,limit):
+        # 用空格给keyword分词
+        kw_list = keyword.split(' ')
+        q = ' and '.join(map(lambda x: 'title:%s'%x,kw_list))
+        query_data = {
+                'q':q.encode('utf8'),
+                'wt':'json',
+                'start':start,
+                'rows':limit,
+                'fl':'title and description and id',
+                'indent':'true'}
+
+        #print query_data
+        return self.solr_query('article',query_data)
+
+
 
 
     def register(self,account,type,password):

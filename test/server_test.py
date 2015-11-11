@@ -100,11 +100,11 @@ class ServerTest(unittest.TestCase):
         self.__http_request(body, headers)
 
 
-    def article_get_by_id_test(self):
+    def article_get_by_id(self):
         '''
         示例代码
         '''
-        body = {"protocol":Protocol.ARTICLE_GET_BY_ID,"params":{"id":11}}
+        body = {"protocol":Protocol.ARTICLE_GET_BY_ID,"params":{"id":'b2a801ce-9e24-4b28-b5a9-b1c84829e669'}}
         headers = {} 
         self.__http_request(body, headers)
                 
@@ -112,7 +112,7 @@ class ServerTest(unittest.TestCase):
         '''
         示例代码
         '''
-        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD,"params":{"keyword":"孩","start":1100,"limit":5}}
+        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD,"params":{"keyword":"幼儿园 感冒","start":0,"limit":10}}
         headers = {} 
         self.__http_request(body, headers)
    

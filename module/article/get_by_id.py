@@ -25,7 +25,9 @@ class GetById(Processor):
     def process(self):
 
         article_id = self.handler.request_body['params']['id']
-                
+        
+        res = self.db.get_article(article_id)
+       
         # process datatime format
         #article = self.filter_db_res(article)     
    
@@ -33,7 +35,7 @@ class GetById(Processor):
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
         response['data']['message'] =  "article get by id 成功显示"
-        #response['data']['article'] = article
+        response['data']['result'] = res
                                       
         return response
 

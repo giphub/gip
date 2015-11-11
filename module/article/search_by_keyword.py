@@ -25,17 +25,17 @@ class SearchByKeyword(Processor):
     def process(self):
 
         keyword = self.handler.request_body['params']['keyword']
-        start_id = self.handler.request_body['params']['start']
-        limit_size = self.handler.request_body['params']['limit']
-                
-
+        limit = self.handler.request_body['params'].get('limit',10)
+        start = self.handler.request_body['params'].get('start',0)
+        
+        res = self.db.search_article_by_keyword(keyword,start,limit)
         #articles = self.filter_db_res(articles)     
  
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
-        response['data']['message'] =  "article get by keyword 成功显示"
-        #response['data']['article'] = articles
+        response['data']['message'] =  "ok"
+        response['data']['result'] = res
                                       
         return response
 
