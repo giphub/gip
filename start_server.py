@@ -41,10 +41,6 @@ class App(tornado.web.Application):
         self.build_db_connection(config,'mysql','test')
         self.build_db_connection(config,'mysql','account')
         self.build_db_connection(config,'solr','article')
-        self.build_db_connection(config,'solr','article_tag')
-
-
-        #print self.db_conn
 
         end = time.time()
         logging.info("......启动总耗时："+str((end-start)*1000)+"毫秒")
