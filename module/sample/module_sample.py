@@ -25,13 +25,16 @@ class ModuleSample(Processor):
     def process(self):
 
         #raise LTException(Errorcode.ERROR_NONE)
-        
+       
+        solr_res = self.db.sample_solr()
+        #print solr_res         
+        solr_res = self.filter_db_res(solr_res)
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE
         response['data']['message'] =  "module sample 成功显示"
         response['data']['sample'] = self.db.sample()
-        response['data']['sample_solr'] = self.db.sample_solr()
+        response['data']['sample_solr'] =  solr_res
                                       
         return response
 

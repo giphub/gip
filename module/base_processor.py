@@ -34,11 +34,13 @@ class Processor():
             for i in xrange(0,len(db_res)):
                 db_res[i] = self.filter_db_res(db_res[i])
         elif isinstance(db_res, dict):
-               
             for key in db_res:
-                if type(db_res[key]) == datetime.datetime:
-                    db_res[key] = db_res[key].strftime("%Y-%m-%d %H:%M:%S")  
-           
+                db_res[key] = self.filter_db_res(db_res[key])  
+        
+        if type(db_res) == datetime.datetime:
+            db_res.replace(tzinfo = None)
+            db_res = db_res.strftime("%Y-%m-%d %H:%M:%S")   
+
         return db_res
 
 def module(protocol):

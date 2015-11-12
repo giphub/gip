@@ -75,7 +75,7 @@ class App(tornado.web.Application):
         port = config.get(section,'port')
         collection = config.get(section,'collection')
         url = host + ':' + port 
-        path = '/solr/' + collection + '/' 
+        path = '/solr/' + collection  
         return url,path
 
 

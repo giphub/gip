@@ -29,7 +29,7 @@ class SearchByKeyword(Processor):
         start = self.handler.request_body['params'].get('start',0)
         
         res = self.db.search_article_by_keyword(keyword,start,limit)
-        #articles = self.filter_db_res(articles)     
+        res = self.filter_db_res(res)     
  
         response = {}
         response['data'] = {}

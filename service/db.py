@@ -8,7 +8,7 @@ from tornado.escape import json_decode,json_encode
 
 from constants.errorcode import Errorcode
 from util.gip_exception import GipException
-
+from util.solr_engine import SolrEngine
 
 class DB(object):
     
@@ -20,9 +20,10 @@ class DB(object):
         self.mysql_account_read = application.db_conn['mysql']['account']['read']
         self.mysql_account_write = application.db_conn['mysql']['account']['write']
         
-        self.solr = {}
-        self.solr['article'] = application.db_conn['solr']['article']
+        self.solr_b = {}
+        self.solr_b['article'] = application.db_conn['solr']['article']
 
+        self.solr_article = SolrEngine('''http://%s%s'''%(application.db_conn['solr']['article']['url'],application.db_conn['solr']['article']['path']))
         #self.mongo_conn = application.mongo_conn
     
     
@@ -36,30 +37,13 @@ class DB(object):
         finally:
             
             return result[0]
-
-
-
-
+    
     def sample_solr(self):
-        data ={
-        	'q':'title:幼儿园',
-                'wt':'json',
-                'start':10,
-                'rows':50,
-                'fl':'title',
-                'indent':'true'}
-        #print data
-        return self.solr_query('article',data)                
-
-
+        return self.solr_article.query('*:*',start=0,rows=1) 
+               
     def get_article(self,id):
-        
-        query_data = {
-                'q':'id:%s'%id,
-                'wt':'json',
-                'indent':'true'}
 
-        return self.solr_query('article',query_data)
+        return self.solr_article.query('id:%s'%id,start=0,rows=1) 
 
     def search_article_by_keyword(self,keyword,start,limit):
         # 用空格给keyword分词
@@ -74,9 +58,10 @@ class DB(object):
                 'indent':'true'}
 
         #print query_data
-        return self.solr_query('article',query_data)
+        #return self.solr_query('article',query_data)
 
 
+        return self.solr_article.query(q,fields=['title','description','id'],start=start,rows=limit) 
 
 
     def register(self,account,type,password):
@@ -110,9 +95,9 @@ class DB(object):
     def solr_query(self,index,data):
 
         res = {}
-        path = self.solr[index]['path'] + '''select?''' + urllib.urlencode(data)
+        path = self.solr_b[index]['path'] + '''/select?''' + urllib.urlencode(data)
         try:
-            httpClient = httplib.HTTPConnection(self.solr[index]['url'])
+            httpClient = httplib.HTTPConnection(self.solr_b[index]['url'])
             httpClient.request("GET", path, '' , {})
 
             response = httpClient.getresponse()

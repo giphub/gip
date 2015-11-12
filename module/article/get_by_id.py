@@ -29,7 +29,7 @@ class GetById(Processor):
         res = self.db.get_article(article_id)
        
         # process datatime format
-        #article = self.filter_db_res(article)     
+        res = self.filter_db_res(res)     
    
         response = {}
         response['data'] = {}
