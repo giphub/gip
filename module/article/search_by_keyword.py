@@ -30,7 +30,9 @@ class SearchByKeyword(Processor):
         
         res = self.db.search_article_by_keyword(keyword,start,limit)
         res = self.filter_db_res(res)     
- 
+		
+        res = self.add_img(res,1)
+	 
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE

@@ -31,6 +31,8 @@ class GetById(Processor):
         # process datatime format
         res = self.filter_db_res(res)     
    
+        res = self.add_img(res)
+
         response = {}
         response['data'] = {}
         response['data']['code'] = Errorcode.ERROR_NONE

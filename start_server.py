@@ -40,6 +40,7 @@ class App(tornado.web.Application):
         self.db_conn = {'mysql':{},'mongodb':{},'redis':{},'solr':{}}
         self.build_db_connection(config,'mysql','test')
         self.build_db_connection(config,'mysql','account')
+        self.build_db_connection(config,'mysql','nbarticle')
         self.build_db_connection(config,'solr','article')
 
         end = time.time()

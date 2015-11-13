@@ -20,6 +20,9 @@ class DB(object):
         self.mysql_account_read = application.db_conn['mysql']['account']['read']
         self.mysql_account_write = application.db_conn['mysql']['account']['write']
         
+        self.mysql_article_read = application.db_conn['mysql']['nbarticle']['read']
+        self.mysql_article_write = application.db_conn['mysql']['nbarticle']['write']
+        
         self.solr_b = {}
         self.solr_b['article'] = application.db_conn['solr']['article']
 
@@ -40,6 +43,16 @@ class DB(object):
     
     def sample_solr(self):
         return self.solr_article.query('*:*',start=0,rows=1) 
+
+    def get_article_img_list(self,article_id,num):
+        sql = '''select url2 as url from img where article_id = '%s' '''%article_id
+        if num:
+            sql = sql + 'limit %s'%num
+        
+        #print sql
+        return self.mysql_article_read.query(sql)
+        #return ['1.jpg','2.jpg']           
+
                
     def get_article(self,id):
 

@@ -25,6 +25,15 @@ class Processor():
         self.db = DB(handler.application)
         pass
 
+    def add_img(self,res,num = 0):
+        '''
+        Add img_url to solr result
+        '''
+        for item in res:
+            item['img_url']= self.db.get_article_img_list(item['id'],num)
+        return res
+
+
     def filter_db_res(self,db_res):
         '''
         判断是否是list，分解为dict，

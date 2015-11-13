@@ -104,7 +104,7 @@ class ServerTest(unittest.TestCase):
         '''
         示例代码
         '''
-        body = {"protocol":Protocol.ARTICLE_GET_BY_ID,"params":{"id":'b2a801ce-9e24-4b28-b5a9-b1c84829e669'}}
+        body = {"protocol":Protocol.ARTICLE_GET_BY_ID,"params":{"id":'6a81b294-2677-4b9f-aa1f-10b21099c08b'}}
         headers = {} 
         self.__http_request(body, headers)
                 
