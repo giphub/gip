@@ -23,11 +23,9 @@ class SearchByKeyword(Processor):
         
         
     def process(self):
-
         keyword = self.handler.request_body['params']['keyword']
         limit = self.handler.request_body['params'].get('limit',10)
         start = self.handler.request_body['params'].get('start',0)
-        
         res = self.db.search_article_by_keyword(keyword,start,limit)
         res = self.filter_db_res(res)     
 		

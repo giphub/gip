@@ -35,8 +35,6 @@ class BaseHandler(tornado.web.RequestHandler):
         # 初始化数据库、缓存、日志、等数据连接
         
         self.db = DB(self.application)
-        #self.cache_manager = CacheManger(self.application)
-        #self.txboss_logger =self.application.txboss_logger
         
     def get(self):
         self.write('Server is running...')
@@ -58,5 +56,4 @@ class BaseHandler(tornado.web.RequestHandler):
         
         self.protocol = self.request_body['protocol']
         
-        pass
     
