@@ -6,6 +6,19 @@
   </head>
 
   <body>
+
+<form action="/" method="get">
+  <input type="text" name="wd">
+  <input type="hidden" name="start" value=0>
+  <input type="hidden" name="limit" value=10>  
+  <input type="hidden" name="m" value="search">
+  <input type="submit" value="Search"/>
+
+</form>
+<br/>
+<br/>
+
+
 {% for article in sr %}
 <a href=/?m=article&aid={{article['id']}} target="_blank">{{article['title']}}</a>
 <br/>

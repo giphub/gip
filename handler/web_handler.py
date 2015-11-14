@@ -26,13 +26,16 @@ class WebHandler(BaseHandler):
 
     def search(self):
         
-        keyword = self.get_argument('wd','')
-        start = self.get_argument('start',0)
-        limit = self.get_argument('limit',10)
-
-        body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD,"params":{"keyword":keyword,"start":start,"limit":limit}}
-        response = self._api(body,{})
-        search_result = response['data']['result']
+        keyword = self.get_argument('wd',None)
+        if keyword:
+            start = self.get_argument('start',0)
+            limit = self.get_argument('limit',10)
+            body = {"protocol":Protocol.ARTICLE_SEARCH_BY_KEYWORD,"params":{"keyword":keyword,"start":start,"limit":limit}}
+            response = self._api(body,{})
+            search_result = response['data']['result']
+        
+        else:
+            search_result = []
         self.render('../template/search.html',sr = search_result)
 
     def article(self):
