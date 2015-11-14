@@ -6,7 +6,20 @@
   </head>
 
   <body>
-search
+{% for article in sr %}
+<a href=/?m=article&aid={{article['id']}} target="_blank">{{article['title']}}</a>
+<br/>
+<br/>
+description = {{article['description']}}
+<br/>
+<br/>
+<img src="{{article['img_url'][0]['url']}}" />
+<br/>
+<br/>
+<br/>
+
+{% end %}
+
 
   </body>
 </html>

@@ -6,10 +6,29 @@
   </head>
 
   <body>
-  
-<img src={{article['img_url'][0]['url']}}/>
-  category = {{article['category']}}
+
+<h1>{{article['title']}}</h1>
+
+{% for img in article['img_url'] %}
+<img src={{img['url']}}/>
+{% end %}
+
+
+  <br/>
+  <br/>
+{% for category in article['category'] %}
+  category = {{category}}
+{% end %}
+  <br/>
+  <br/>
+
+  keywords = {{article['keywords']}} 
+  <br/>
+  <br/>
+
   description = {{article['description']}}
+  <br/>
+  <br/>
   content = {{article['content']}}
 
   </body>
