@@ -8,9 +8,13 @@
   <body>
 
 <h1>{{article['title']}}</h1>
-
+{% set i = 0 %}
 {% for img in article['img_url'] %}
-<img src={{img['url']}}/>
+{% set i = i + 1 %}
+{% if img['url'] == '' %}
+{% else %}
+<img src="http://giphub.com:9345/{{img['url']}}/{{i}}.jpg" />
+{% end %}
 {% end %}
 
 

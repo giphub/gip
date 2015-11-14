@@ -45,7 +45,7 @@ class DB(object):
         return self.solr_article.query('*:*',start=0,rows=1) 
 
     def get_article_img_list(self,article_id,num):
-        sql = '''select url2 as url from img where article_id = '%s' '''%article_id
+        sql = '''select url from img where article_id = '%s' '''%article_id
         if num:
             sql = sql + 'limit %s'%num
         

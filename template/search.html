@@ -26,7 +26,12 @@
 description = {{article['description']}}
 <br/>
 <br/>
-<img src="{{article['img_url'][0]['url']}}" />
+{% if article['img_url'][0]['url'] == '' %}
+<br/>
+{% else %}
+
+<img src="http://giphub.com:9345/{{article['img_url'][0]['url']}}/2.jpg" />
+{% end %}
 <br/>
 <br/>
 <br/>
