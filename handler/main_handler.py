@@ -26,7 +26,7 @@ class MainHandler(BaseHandler):
     def post(self):
         try:
             # 日志记录请求参数
-            logging.info('记录日志')
+            #logging.info('记录日志')
             # 安全过滤并，读取请求内容，验证应用授权
             self.init_request()
             #分协议调用moldule处理

@@ -123,7 +123,7 @@ class ServerTest(unittest.TestCase):
         
         try:
             httpClient = httplib.HTTPConnection(self.server_url)
-            httpClient.request("POST", "/", json_encode(body), headers)
+            httpClient.request("POST", "/s", json_encode(body), headers)
             
             response = httpClient.getresponse()
             

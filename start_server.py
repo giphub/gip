@@ -18,8 +18,7 @@ import torndb
 
 
 from handler.main_handler import MainHandler
-
-
+from handler.web_handler import WebHandler
 class App(tornado.web.Application):
     '''
     继承tornado.web.Application
@@ -28,8 +27,15 @@ class App(tornado.web.Application):
     
     def __init__(self,config):
         start=time.time()
+        
+        settings = dict(gzip = True,
+                        debug = False,
+                        static_path = "public") 
+        
         handlers = [
-            (r"/", MainHandler),  
+            (r"/s", MainHandler), 
+            (r"/",WebHandler),
+            (r"/public/(.*)",tornado.web.StaticFileHandler,dict(path=settings['static_path'])),
         ]
     
         settings = dict(gzip=True,
