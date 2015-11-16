@@ -1,19 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
   <head>
     <title></title>
-    
+  <link href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">    
   </head>
 
   <body>
 
-<form action="/" method="get">
-  <input type="text" name="wd">
-  <input type="hidden" name="start" value=0>
-  <input type="hidden" name="limit" value=10>  
-  <input type="hidden" name="m" value="search">
-  <input type="submit" value="Search"/>
-
+<form action="/" method="get" >
+    <input type="text" name="wd">
+    <input type="hidden" name="start" value=0>
+    <input type="hidden" name="limit" value=10>  
+    <input type="hidden" name="m" value="search">
+    <input type="submit" value="Search"/>
+  
 </form>
 <br/>
 <br/>
@@ -37,7 +38,7 @@ description = {{article['description']}}
 <br/>
 
 {% end %}
-
-
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </body>
 </html>
